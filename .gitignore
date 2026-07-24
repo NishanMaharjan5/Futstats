@@ -1,0 +1,35 @@
+# Virtual environment
+venv/
+
+# Inference outputs
+runs/
+
+# Labeling working data (extracted frames, exported datasets)
+data/
+
+# Sample video data (large / not source)
+videos/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS junk
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+
+# Claude Code local files
+.claude/
+
+# Secrets
+.env
+
+# Large media & dataset archives (safety net beyond videos/ and data/).
+# Model weights (*.pt) are intentionally committed, so they are NOT ignored.
+*.mp4
+*.mov
+*.avi
+*.zip

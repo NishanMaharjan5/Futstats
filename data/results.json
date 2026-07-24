@@ -1,0 +1,37 @@
+{
+  "match_info": {
+    "duration_sec": 480,
+    "teams": ["Black", "Pink/White"],
+    "team_colors": ["#1a1a1a", "#ec4899"],
+    "venue": "Rooftop Futsal Court",
+    "date": "2026-07-24"
+  },
+  "possession": {
+    "team_a_pct": 46.3,
+    "team_b_pct": 53.7
+  },
+  "players": [
+    { "id": 1, "team": "Black",      "touches": 28, "passes": 15, "turnovers": 2, "rating": 6.8 },
+    { "id": 2, "team": "Black",      "touches": 22, "passes": 11, "turnovers": 4, "rating": 6.1 },
+    { "id": 3, "team": "Black",      "touches": 19, "passes": 9,  "turnovers": 3, "rating": 5.9 },
+    { "id": 4, "team": "Black",      "touches": 24, "passes": 13, "turnovers": 2, "rating": 7.0 },
+    { "id": 5, "team": "Pink/White", "touches": 26, "passes": 14, "turnovers": 3, "rating": 7.1 },
+    { "id": 6, "team": "Pink/White", "touches": 21, "passes": 10, "turnovers": 2, "rating": 6.5 },
+    { "id": 7, "team": "Pink/White", "touches": 38, "passes": 19, "turnovers": 3, "rating": 8.3 },
+    { "id": 8, "team": "Pink/White", "touches": 23, "passes": 12, "turnovers": 3, "rating": 6.7 }
+  ],
+  "totals": {
+    "touches": 201,
+    "passes": 103,
+    "turnovers": 22,
+    "most_active_player_id": 7
+  },
+  "assets": {
+    "video": "assets/annotated_demo.mp4",
+    "heatmap_match": "assets/heatmap_match.png",
+    "heatmap_team_a": "assets/heatmap_teamA.png",
+    "heatmap_team_b": "assets/heatmap_teamB.png",
+    "pass_network": "assets/pass_network.png",
+    "timeline": "assets/event_timeline.png"
+  }
+}

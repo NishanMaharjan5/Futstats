@@ -4,8 +4,11 @@ venv/
 # Inference outputs
 runs/
 
-# Labeling working data (extracted frames, exported datasets)
-data/
+# Labeling working data (extracted frames, exported datasets).
+# Ignore everything under data/ EXCEPT the dashboard's mock results.json.
+# (Ignore data/* rather than data/ so git can descend and re-include the file.)
+data/*
+!data/results.json
 
 # Sample video data (large / not source)
 videos/

@@ -1,0 +1,42 @@
+{
+  "match_info": {
+    "team_a_name": "Himal FC",
+    "team_b_name": "Rani Futsal Club",
+    "date": "2026-06-14",
+    "venue": "Sifal Futsal Arena, Kathmandu",
+    "duration_min": 40
+  },
+
+  "possession": {
+    "team_a_pct": 57,
+    "team_b_pct": 43
+  },
+
+  "team_balance_check": {
+    "team_a_players_detected": 7,
+    "team_b_players_detected": 7,
+    "note": "internal QA - not surfaced in UI"
+  },
+
+  "players": [
+    { "id": "04", "team": "A", "touches": 212, "passes": 61, "turnovers": 6, "activity_rank": 2, "rating": 8.1 }
+  ],
+
+  "assets": {
+    "video": "assets/match_014_annotated.mp4",
+    "heatmap_match": "assets/heatmap_match.png",
+    "heatmap_team_a": "assets/heatmap_team_a.png",
+    "heatmap_team_b": "assets/heatmap_team_b.png",
+    "pass_network_team_a": "assets/pass_network_team_a.png",
+    "pass_network_team_b": "assets/pass_network_team_b.png",
+    "radar_before": "assets/radar_expected.png",
+    "radar_after": "assets/radar_actual.png"
+  },
+
+  "model_info": {
+    "map50": 91.4,
+    "frames_labeled": 18400,
+    "annotations": 142300,
+    "dataset_note": "Filmed at local futsal venues and hand-labeled frame by frame for player and ball position."
+  }
+}

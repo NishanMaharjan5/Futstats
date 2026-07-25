@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FutStats — Match Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="assets/FutStats_Logo.png" alt="FutStats Logo" class="brand-logo">
+      <div class="brand-text">
+        <span class="brand-name">Fut<span>Stats</span></span>
+        <span class="brand-tagline">PLAY. ANALYZE. IMPROVE.</span>
+      </div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <button class="nav-item is-active" data-tab="overview">
+        <span class="nav-dot"></span> Overview
+      </button>
+      <button class="nav-item" data-tab="heatmaps">
+        <span class="nav-dot"></span> Heatmaps
+      </button>
+      <button class="nav-item" data-tab="passnet">
+        <span class="nav-dot"></span> Pass Networks
+      </button>
+      <button class="nav-item" data-tab="players">
+        <span class="nav-dot"></span> Players
+      </button>
+      <button class="nav-item" data-tab="video">
+        <span class="nav-dot"></span> Video
+      </button>
+      <button class="nav-item" data-tab="limitations">
+        <span class="nav-dot"></span> What We Tried
+      </button>
+      <button class="nav-item" data-tab="about">
+        <span class="nav-dot"></span> About
+      </button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <span class="theme-label">Dark Mode</span>
+      </button>
+      <span class="pipeline-tag">YOLOv8 · Custom Nepali Futsal Dataset</span>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <!-- Top match bar, present on every tab -->
+    <header class="matchbar" id="matchbar"></header>
+
+    <!-- ---------- OVERVIEW ---------- -->
+    <section class="tab is-active" id="tab-overview">
+      <div class="grid grid-2">
+
+        <div class="card card-hero">
+          <div class="card-label">Possession</div>
+          <div id="possession-bar-hero"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Detection Confidence</div>
+          <div id="map-summary" class="map-summary"></div>
+          <p class="card-note">Model performance on our labeled Nepali futsal dataset — full breakdown under About.</p>
+        </div>
+
+      </div>
+
+      <div class="grid grid-2" style="margin-top:20px;">
+        <div class="card">
+          <div class="card-label-row">
+            <span class="card-label">Match Heatmap</span>
+            <button class="link-btn" data-goto="heatmaps">View all →</button>
+          </div>
+          <div class="img-frame img-frame-sm" id="overview-heatmap"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-label-row">
+            <span class="card-label">Top Rated Players</span>
+            <button class="link-btn" data-goto="players">Full table →</button>
+          </div>
+          <div id="top-players"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- HEATMAPS ---------- -->
+    <section class="tab" id="tab-heatmaps">
+      <div class="card">
+        <div class="card-label">Match Heatmap — Both Teams Combined</div>
+        <p class="card-note">Positional density across the full clip. Team-level output — fully reliable.</p>
+        <div class="img-frame img-frame-lg" id="heatmap-match"></div>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:20px;">
+        <div class="card">
+          <div class="card-label"><span class="team-dot team-a"></span><span id="hm-team-a-name"></span></div>
+          <div class="img-frame" id="heatmap-team-a"></div>
+        </div>
+        <div class="card">
+          <div class="card-label"><span class="team-dot team-b"></span><span id="hm-team-b-name"></span></div>
+          <div class="img-frame" id="heatmap-team-b"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- PASS NETWORKS ---------- -->
+    <section class="tab" id="tab-passnet">
+      <p class="section-intro">Node position = average involvement area. Line thickness = pass frequency between two players. Shown separately per team — combining both sides would blur which passes belong to which team.</p>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-label"><span class="team-dot team-a"></span><span id="pn-team-a-name"></span></div>
+          <div class="img-frame" id="passnet-team-a"></div>
+        </div>
+        <div class="card">
+          <div class="card-label"><span class="team-dot team-b"></span><span id="pn-team-b-name"></span></div>
+          <div class="img-frame" id="passnet-team-b"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- PLAYERS ---------- -->
+    <section class="tab" id="tab-players">
+      <div class="players-toolbar">
+        <div class="team-filter" id="team-filter">
+          <button class="chip is-active" data-team="all">All</button>
+        </div>
+        <div class="identity-note">
+          <span class="info-dot">i</span>
+          Player identity is tracked automatically and may occasionally split one player into multiple entries during fast camera movement.
+        </div>
+      </div>
+
+      <div class="card table-card">
+        <table class="player-table" id="player-table">
+          <thead>
+            <tr>
+              <th data-sort="id">Player ID</th>
+              <th data-sort="team">Team</th>
+              <th data-sort="touches">Touches</th>
+              <th data-sort="passes">Passes</th>
+              <th data-sort="turnovers">Turnovers</th>
+              <th data-sort="activity">Activity</th>
+              <th data-sort="rating">Rating</th>
+            </tr>
+          </thead>
+          <tbody id="player-table-body"></tbody>
+        </table>
+      </div>
+      <p class="card-note" style="margin-top:10px;">Activity ranks players by relative on-screen movement (pixels), not real-world distance — no camera calibration or GPS is used.</p>
+    </section>
+
+    <!-- ---------- VIDEO ---------- -->
+    <section class="tab" id="tab-video">
+      <div class="video-layout">
+        <div class="card video-card">
+          <div class="video-frame" id="video-frame">
+            <video id="video-el" controls preload="metadata">
+              Your browser does not support embedded video.
+            </video>
+            <div class="video-placeholder" id="video-placeholder">
+              <div class="video-placeholder-boxes">
+                <span class="mockbox mockbox-a" style="top:38%;left:22%;">#04</span>
+                <span class="mockbox mockbox-a" style="top:52%;left:41%;">#11</span>
+                <span class="mockbox mockbox-b" style="top:30%;left:63%;">#22</span>
+                <span class="mockbox mockbox-ball" style="top:58%;left:52%;">ball</span>
+              </div>
+              <p>Drop a rendered clip in as <code>assets.video</code> to preview it here. Boxes are baked into the export with team-coloured borders and track-ID labels.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card video-sidebar">
+          <div class="card-label">Legend</div>
+          <div class="legend-row"><span class="swatch team-a"></span><span id="v-team-a-name"></span></div>
+          <div class="legend-row"><span class="swatch team-b"></span><span id="v-team-b-name"></span></div>
+          <div class="legend-row"><span class="swatch ball"></span> Ball</div>
+          <div class="legend-divider"></div>
+          <div class="card-label">Reading a box</div>
+          <p class="card-note">Border colour = team. Label = track ID, the same identifier used in the player table. If a track resets mid-match, a player may briefly wear a new ID — see the note under Players.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- LIMITATIONS ---------- -->
+    <section class="tab" id="tab-limitations">
+      <p class="section-intro">What we tried, what worked, and what's explicitly not in this build yet — kept visible rather than tucked away.</p>
+
+      <div class="card">
+        <div class="card-label">2D Radar Projection (Top-Down Tactical View)</div>
+        <p class="card-note">Attempted full-pitch broadcast-style radar projection. It didn't hold up because our camera isn't perfectly fixed — small pans and tilts across a match break a static homography, so player dots drift off their real pitch positions over time.</p>
+        <div class="grid grid-2" style="margin-top:14px;">
+          <div class="img-frame" id="radar-before">
+            <div class="frame-tag">Expected</div>
+          </div>
+          <div class="img-frame" id="radar-after">
+            <div class="frame-tag frame-tag-warn">What we actually got</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:20px;">
+        <div class="card status-card">
+          <div class="status-pill status-not-built">Not implemented</div>
+          <div class="card-label">Real-world distance / speed (km/h)</div>
+          <p class="card-note">Would need a stabilised camera or a proper calibration method to convert pixels to metres. Not shown anywhere as a stat — there's no slot for it waiting to be filled.</p>
+        </div>
+        <div class="card status-card">
+          <div class="status-pill status-next">Next up</div>
+          <div class="card-label">Shot / goal detection</div>
+          <p class="card-note">Flagged as a documented next step for the model, not something built into this release. No UI slot has been designed for it yet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- ABOUT ---------- -->
+    <section class="tab" id="tab-about">
+      <div class="grid grid-3" id="about-stats"></div>
+
+      <div class="card" style="margin-top:20px;">
+        <div class="card-label">How the dataset was built</div>
+        <p class="card-note" id="about-dataset-note">—</p>
+      </div>
+
+      <div class="card" style="margin-top:20px;">
+        <div class="card-label">Pipeline</div>
+        <div class="pipeline-steps">
+          <div class="pipeline-step">Film match</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">Extract frames</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">Label player / ball positions</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">Train YOLOv8</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">Track across video</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step">Compute stats</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -36,6 +36,27 @@ function dot(color, small) {
 // Rating badge is a STATUS color that always carries the number (never color-alone).
 const ratingClass = r => (r >= 7 ? "good" : r >= 6 ? "warn" : "bad");
 
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  const label = $("#theme-toggle .theme-label");
+  if (label) label.textContent = theme === "light" ? "Light" : "Dark";
+  try { localStorage.setItem("futstats-theme", theme); } catch (e) {}
+}
+
+function initTheme() {
+  let saved = "dark";
+  try { saved = localStorage.getItem("futstats-theme") || "dark"; } catch (e) {}
+  applyTheme(saved);
+  const btn = $("#theme-toggle");
+  if (btn) {
+    btn.addEventListener("click", () => {
+      const current = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+      applyTheme(current === "dark" ? "light" : "dark");
+    });
+  }
+}
+initTheme();
+
 const STATE = { data: null, sortKey: "rating", sortDir: -1 };
 
 fetch("data/results.json")

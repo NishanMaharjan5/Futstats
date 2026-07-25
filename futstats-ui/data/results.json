@@ -1,0 +1,108 @@
+{
+  "match_info": {
+    "team_a_name": "Black",
+    "team_b_name": "Pink/White",
+    "date": "2026-07-25",
+    "venue": "Static-camera futsal clip",
+    "duration_min": 1.5
+  },
+  "possession": {
+    "team_a_pct": 39.4,
+    "team_b_pct": 60.6
+  },
+  "team_balance_check": {
+    "team_a_players_detected": 36,
+    "team_b_players_detected": 38,
+    "note": "unique track_ids per team over clip; per-frame hard-capped at 4v4 (ID fragmentation). Internal QA \u2014 not surfaced."
+  },
+  "players": [
+    {
+      "id": "4",
+      "team": "A",
+      "touches": 9,
+      "passes": 3,
+      "turnovers": 6,
+      "activity_rank": 2,
+      "rating": 6.2
+    },
+    {
+      "id": "412",
+      "team": "A",
+      "touches": 8,
+      "passes": 0,
+      "turnovers": 3,
+      "activity_rank": 3,
+      "rating": 5.9
+    },
+    {
+      "id": "225",
+      "team": "A",
+      "touches": 5,
+      "passes": 4,
+      "turnovers": 1,
+      "activity_rank": 7,
+      "rating": 7.3
+    },
+    {
+      "id": "336",
+      "team": "A",
+      "touches": 5,
+      "passes": 1,
+      "turnovers": 2,
+      "activity_rank": 8,
+      "rating": 5.5
+    },
+    {
+      "id": "1",
+      "team": "B",
+      "touches": 16,
+      "passes": 5,
+      "turnovers": 10,
+      "activity_rank": 1,
+      "rating": 7.2
+    },
+    {
+      "id": "325",
+      "team": "B",
+      "touches": 7,
+      "passes": 1,
+      "turnovers": 5,
+      "activity_rank": 4,
+      "rating": 5.4
+    },
+    {
+      "id": "6",
+      "team": "B",
+      "touches": 6,
+      "passes": 3,
+      "turnovers": 1,
+      "activity_rank": 5,
+      "rating": 6.5
+    },
+    {
+      "id": "108",
+      "team": "B",
+      "touches": 6,
+      "passes": 2,
+      "turnovers": 2,
+      "activity_rank": 6,
+      "rating": 6.2
+    }
+  ],
+  "assets": {
+    "video": "../runs/analytics_core/static_trimmed_annotated_h264.mp4",
+    "heatmap_match": "assets/heatmap_match.png",
+    "heatmap_team_a": "assets/heatmap_team_a.png",
+    "heatmap_team_b": "assets/heatmap_team_b.png",
+    "pass_network_team_a": "assets/pass_network_team_a.png",
+    "pass_network_team_b": "assets/pass_network_team_b.png",
+    "radar_before": "",
+    "radar_after": ""
+  },
+  "model_info": {
+    "map50": 92.0,
+    "frames_labeled": 498,
+    "annotations": 3738,
+    "dataset_note": "Filmed at a local futsal venue and hand-labeled frame-by-frame for player and ball positions."
+  }
+}

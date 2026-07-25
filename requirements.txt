@@ -1,8 +1,5 @@
 ultralytics      # YOLO model loading + inference (detection/tracking)
 opencv-python    # video/frame I/O and image processing
 matplotlib       # plotting (heatmaps, possession charts, training curves)
-scipy            # scientific computing (spatial distances, smoothing, stats)
-scikit-learn     # ML utilities (clustering, metrics, preprocessing)
-roboflow         # dataset download / management
-pandas           # tabular match data + stats
-streamlit        # interactive dashboard / demo app
+scikit-learn     # ML utilities (KMeans clustering for team classification)
+numpy            # array ops (used throughout detection/tracking/stats)

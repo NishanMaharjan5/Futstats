@@ -19,8 +19,8 @@
   --accent-glow: rgba(166, 226, 46, 0.25);
   --accent-dim: #84BD20;
 
-  --team-a: #A6E22E;
-  --team-a-soft: rgba(166, 226, 46, 0.16);
+  --team-a: #FFC800;
+  --team-a-soft: rgba(255, 200, 0, 0.16);
   --team-b: #38BDF8;
   --team-b-soft: rgba(56, 189, 248, 0.16);
 
@@ -62,8 +62,8 @@
   --accent-glow: rgba(85, 139, 47, 0.22);
   --accent-dim: #33691E;
 
-  --team-a: #558B2F;
-  --team-a-soft: rgba(85, 139, 47, 0.14);
+  --team-a: #C99A00;
+  --team-a-soft: rgba(201, 154, 0, 0.14);
   --team-b: #0284C7;
   --team-b-soft: rgba(2, 132, 199, 0.14);
 

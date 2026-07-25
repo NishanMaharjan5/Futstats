@@ -49,7 +49,7 @@ from ultralytics import YOLO
 # --- defaults --------------------------------------------------------------
 DEFAULT_VIDEO = "videos/match1.mov"
 DEFAULT_MODEL = "models/futstats.pt"
-DEFAULT_OUT = "data/analytics_raw.pkl"
+DEFAULT_OUT = "data/analytics_raw_static_trimmed.pkl"
 DEFAULT_VIDEO_OUT = "runs/analytics_core/annotated.mp4"
 
 PLAYER_CLASS, BALL_CLASS = 0, 1

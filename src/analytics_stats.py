@@ -196,8 +196,8 @@ def render_team_pass_network(team, edges, node_pos, team_map, touches, w, h, out
 # ---------------------------------------------------------------------------
 def main():
     ap = argparse.ArgumentParser(description="FutStats downstream stats from analytics_raw.pkl")
-    ap.add_argument("--in", dest="inp", default="data/analytics_raw.pkl")
-    ap.add_argument("--outdir", default="runs/analytics_stats")
+    ap.add_argument("--in", dest="inp", default="data/analytics_raw_static_trimmed.pkl")
+    ap.add_argument("--outdir", default="runs/analytics_stats_static_trimmed")
     ap.add_argument("--players-per-team", type=int, default=4,
                     help="expected players per team for the team-balance check (4v4=4)")
     args = ap.parse_args()

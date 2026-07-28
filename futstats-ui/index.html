@@ -47,6 +47,12 @@
       </button>
     </nav>
 
+    <div class="upload-block">
+      <input type="file" id="upload-input" accept=".mp4,.mov,.avi" hidden>
+      <button class="upload-btn" id="upload-btn" type="button"><span class="upload-ico">⬆</span> Analyze a video</button>
+      <span class="upload-hint">mp4 / mov / avi · takes 15–25+ min</span>
+    </div>
+
     <div class="sidebar-foot">
       <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
         <svg class="icon-moon" viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
@@ -62,6 +68,16 @@
 
     <!-- Top match bar, present on every tab -->
     <header class="matchbar" id="matchbar"></header>
+
+    <!-- Upload / processing banner (hidden until a job runs) -->
+    <div class="job-banner" id="job-banner" hidden>
+      <div class="job-spinner"></div>
+      <div class="job-banner-text">
+        <strong id="job-stage">Queued</strong>
+        <span id="job-sub"></span>
+      </div>
+      <button class="job-dismiss" id="job-dismiss" type="button" hidden>Dismiss</button>
+    </div>
 
     <!-- ---------- OVERVIEW ---------- -->
     <section class="tab is-active" id="tab-overview">

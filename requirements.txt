@@ -3,3 +3,6 @@ opencv-python    # video/frame I/O and image processing
 matplotlib       # plotting (heatmaps, possession charts, training curves)
 scikit-learn     # ML utilities (KMeans clustering for team classification)
 numpy            # array ops (used throughout detection/tracking/stats)
+fastapi          # video-upload API backend (src/api/main.py)
+uvicorn          # ASGI server to run the FastAPI app (one process for API + UI)
+python-multipart # multipart/form-data parsing for file uploads

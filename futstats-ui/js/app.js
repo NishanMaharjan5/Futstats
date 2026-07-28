@@ -344,11 +344,9 @@
     }
   }
 
-  /* ---------------- init ---------------- */
+  /* ---------------- render everything from one data object ---------------- */
 
-  initTheme();
-
-  loadData().then((data) => {
+  function renderAll(data) {
     DATA = data;
     renderMatchbar();
     renderOverview();
@@ -356,10 +354,86 @@
     renderPassNetworks();
     renderTeamFilter();
     renderPlayerTable();
-    bindTableSort();
     renderVideo();
     renderLimitations();
     renderAbout();
-    bindNav();
-  });
+  }
+
+  /* ---------------- upload + job polling (FastAPI backend) ---------------- */
+
+  function jobBanner(show) {
+    const b = document.getElementById("job-banner");
+    if (b) b.hidden = !show;
+  }
+
+  function jobStage(stage, sub, isError) {
+    const b = document.getElementById("job-banner");
+    const st = document.getElementById("job-stage");
+    const su = document.getElementById("job-sub");
+    const dz = document.getElementById("job-dismiss");
+    if (st) st.textContent = stage || "";
+    if (su) su.textContent = sub || "";
+    if (b) b.classList.toggle("is-error", !!isError);
+    if (dz) dz.hidden = !isError;   // let the user dismiss a failed/error banner
+  }
+
+  function uploadVideo(file) {
+    const fd = new FormData();
+    fd.append("video", file);
+    jobBanner(true);
+    jobStage("Uploading video…", file.name, false);
+    fetch("/api/upload", { method: "POST", body: fd })
+      .then((r) => (r.ok ? r.json() : r.json().then((e) => { throw new Error(e.detail || "HTTP " + r.status); })))
+      .then((j) => pollJob(j.job_id))
+      .catch((err) => jobStage("Upload failed", err.message, true));
+  }
+
+  function pollJob(jobId) {
+    const tick = () => {
+      fetch("/api/status/" + jobId)
+        .then((r) => r.json())
+        .then((s) => {
+          if (s.status === "failed") {
+            jobStage("Processing failed", s.error || "unknown error", true);
+            return;
+          }
+          if (s.status === "done") {
+            jobStage("Done — loading results…", "", false);
+            fetch("/api/results/" + jobId)
+              .then((r) => r.json())
+              .then((data) => { renderAll(data); showTab("overview"); jobBanner(false); })
+              .catch((err) => jobStage("Couldn't load results", err.message, true));
+            return;
+          }
+          // queued | processing
+          jobStage(s.stage || "Processing…", "This can take 15–25+ minutes — keep this tab open.", false);
+          setTimeout(tick, 4000);
+        })
+        .catch((err) => jobStage("Lost contact with server", err.message, true));
+    };
+    tick();
+  }
+
+  function setupUpload() {
+    const btn = document.getElementById("upload-btn");
+    const input = document.getElementById("upload-input");
+    const dz = document.getElementById("job-dismiss");
+    if (btn && input) {
+      btn.addEventListener("click", () => input.click());
+      input.addEventListener("change", () => {
+        const f = input.files[0];
+        if (f) uploadVideo(f);
+        input.value = "";
+      });
+    }
+    if (dz) dz.addEventListener("click", () => jobBanner(false));
+  }
+
+  /* ---------------- init ---------------- */
+
+  initTheme();
+  bindNav();
+  bindTableSort();
+  setupUpload();
+  loadData().then(renderAll);
 })();

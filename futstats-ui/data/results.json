@@ -90,14 +90,14 @@
     }
   ],
   "assets": {
-    "video": "../runs/analytics_core/static_trimmed_annotated_h264.mp4",
+    "video": "../runs/analytics_core/static_trimmed_annotated.mp4",
     "heatmap_match": "assets/heatmap_match.png",
     "heatmap_team_a": "assets/heatmap_team_a.png",
     "heatmap_team_b": "assets/heatmap_team_b.png",
     "pass_network_team_a": "assets/pass_network_team_a.png",
     "pass_network_team_b": "assets/pass_network_team_b.png",
-    "radar_before": "",
-    "radar_after": ""
+    "radar_before": "assets/radar_expected.jpg",
+    "radar_after": "assets/radar_actual.jpg"
   },
   "model_info": {
     "map50": 92.0,

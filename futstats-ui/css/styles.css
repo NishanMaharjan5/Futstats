@@ -1094,3 +1094,5 @@ button:focus-visible, .chip:focus-visible, th:focus-visible {
 @keyframes job-spin{ to{ transform:rotate(360deg); } }
 .job-dismiss{ margin-left:auto; padding:6px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); background:transparent; color:var(--text-secondary); font-size:12px; cursor:pointer; }
 .job-dismiss:hover{ color:var(--text-primary); border-color:var(--border-accent); }
+
+.job-banner[hidden]{ display:none !important; }   /* keep hidden until a job runs */
